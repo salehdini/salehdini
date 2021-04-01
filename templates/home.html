@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% block title %} Home Page {{block.super}} {% endblock %} {% block body %}
+<h1 class="text-center">Hey {% if request.user.get_full_name %}{{ request.user.get_full_name }} {% elif request.user.get_username %} {{ request.user.get_username}}{% else %}
+    <h3 class="text-center font-italic"> New User</h3>{% endif %},
+    <h3 class="text-center"> Welcome to Home page ........</h3>
+</h1>
+{% endblock %}

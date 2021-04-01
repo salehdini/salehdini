@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block title %} Detail Page - {{block.super}} {% endblock %} {% block body %}
+
+<div class="row">
+    <div class="card col-md-8 offset-md-2">
+        <div class="card-body">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="img-fluid"> {% endif %}
+            <h5 class="card-title">{{post.title}} <small> {{post.published_date|timesince}} before</small></h5>
+            <h6>نویسنده : {{ post.author.get_full_name }}</h6>
+            <p class="card-text">{{post.content|safe|linebreaks}}</p>
+            {% if request.user.is_authenticated %}
+            <a href="{{post.get_update_url}}" class="btn btn-warning"> Edit</a>
+            <a href="{{post.get_delete_url}}" class="btn btn-danger"> Delete</a> {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-8 offset-md-2 mt-5">
+        <h3 align="right"> دیدگاه ها </h3>
+        {% include 'post/comment.html' %} {% for comment in post.comments.all %}
+        <br><br>
+        <h4>{{comment.name}} | <small>{{comment.created_date|timesince}} ago</small></h4>
+        <p>{{comment.content|linebreaks}}</p>
+        <br>
+        <hr> {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

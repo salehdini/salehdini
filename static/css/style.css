@@ -1,0 +1,11 @@
+body {
+    padding-top: 70px;
+}
+
+.card {
+    margin-bottom: 18px;
+}
+
+.card.card-title small {
+    padding-left: 1rem;
+}
